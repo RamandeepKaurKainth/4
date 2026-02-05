@@ -1,4 +1,4 @@
-const API_BASE = "https://YOUR-SERVER2-DOMAIN/api/v1";
+const API_BASE = "https://four-owb8.onrender.com/api/v1";
 
 document.getElementById("insertBtn").onclick = async () => {
     const res = await fetch(`${API_BASE}/insert`, {
