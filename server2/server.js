@@ -24,7 +24,7 @@ const server = http.createServer(async (req, res) => {
     // GET /api/v1/sql/<query>
     if (req.method === "GET" && parsed.pathname.startsWith("/api/v1/sql/")) {
         const sql = decodeURIComponent(parsed.pathname.replace("/api/v1/sql/", ""));
-
+        console.log("Received SQL query:", sql);
         try {
             const rows = await runSelectQuery(sql);
             res.end(JSON.stringify(rows, null, 2));

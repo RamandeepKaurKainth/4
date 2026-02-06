@@ -1,14 +1,14 @@
 import mysql from "mysql2/promise";
 
-// export const writerConfig = {
-//     host: process.env.DB_HOST,
-//     port: process.env.DB_PORT,
-//     user: process.env.DB_USER_WRITER,
-//     password: process.env.DB_PASS_WRITER,
-//     database: process.env.DB_NAME
-// };
+export const writerConfig = {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER_WRITER,
+    password: process.env.DB_PASS_WRITER,
+    database: process.env.DB_NAME
+};
 
-export const connection = {
+export const readerConfig = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     user: process.env.DB_USER,      // root
