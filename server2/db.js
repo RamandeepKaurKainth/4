@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config(); // <-- this loads .env file
 import mysql from "mysql2/promise";
 
 export const writerConfig = {
@@ -18,14 +20,14 @@ export const readerConfig = {
 
 
 export async function ensureTableExists() {
+    console.log(writerConfig);
     const conn = await mysql.createConnection(writerConfig);
 
     await conn.execute(`
         CREATE TABLE IF NOT EXISTS patient (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            patientid INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(50),
-            age INT,
-            diagnosis VARCHAR(100)
+            dateOfBirth datetime
         ) ENGINE=InnoDB;
     `);
 
@@ -36,14 +38,14 @@ export async function insertRows() {
     const conn = await mysql.createConnection(writerConfig);
 
     const rows = [
-        ["Alice", 30, "Flu"],
-        ["Bob", 45, "Diabetes"],
-        ["Charlie", 29, "Asthma"]
+        ["Alice", "1997-07-29"],
+        ["Bob", "1997-07-29"],
+        ["Charlie", "1997-07-29"]
     ];
 
     for (const r of rows) {
         await conn.execute(
-            "INSERT INTO patient (name, age, diagnosis) VALUES (?, ?, ?)",
+            "INSERT INTO patient (name, dateOfBirth) VALUES ( ?, ?)",
             r
         );
     }

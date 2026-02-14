@@ -7,10 +7,14 @@ const server = http.createServer(async (req, res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET, POST");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-    const parsed = url.parse(req.url, true);
 
-    // POST /api/v1/insert
-    if (req.method === "POST" && parsed.pathname === "/api/v1/insert") {
+
+    const parsed = url.parse(req.url, true);
+     //console.log(parsed);
+     //console.log(parsed.pathname)
+
+    // POST insert
+    if (req.method === "POST" && parsed.pathname === "/insert") {
         try {
             await ensureTableExists();
             await insertRows();
@@ -21,9 +25,9 @@ const server = http.createServer(async (req, res) => {
         return;
     }
 
-    // GET /api/v1/sql/<query>
-    if (req.method === "GET" && parsed.pathname.startsWith("/api/v1/sql/")) {
-        const sql = decodeURIComponent(parsed.pathname.replace("/api/v1/sql/", ""));
+    // GET sql/<query>
+    if (req.method === "GET" && parsed.pathname.startsWith("/sql")) {
+        const sql = decodeURIComponent(parsed.pathname.replace("/sql/", ""));
         console.log("Received SQL query:", sql);
         try {
             const rows = await runSelectQuery(sql);

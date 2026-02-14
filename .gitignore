@@ -1,5 +1,5 @@
 # Node modules (VERY IMPORTANT)
-node_modules/
+server2/node_modules/
 
 # Package lock (optional – usually keep it, see note below)
 # package-lock.json
