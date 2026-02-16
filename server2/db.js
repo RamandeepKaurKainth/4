@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config(); // <-- this loads .env file
 import mysql from "mysql2/promise";
-
+//ChatGPT-5 mini  (https://chat.openai.com/) was used to code solutions presented in this assignment.
 export class Database {
     constructor() {
         this.writerConfig = {

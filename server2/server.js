@@ -1,6 +1,7 @@
 import http from "http";
 import url from "url";
 import {Database} from "./db.js";
+//ChatGPT-5 mini  (https://chat.openai.com/) was used to code solutions presented in this assignment.
 
 const db = new Database();
 const server = http.createServer(async (req, res) => {
