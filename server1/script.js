@@ -10,7 +10,7 @@ document.getElementById("response").textContent = USER_MESSAGES.response;
 document.getElementById("sqlBox").placeholder = USER_MESSAGES.textBoxHint;
 document.getElementById("insertBox").placeholder = USER_MESSAGES.insertBoxHint;
 document.getElementById("insertBtn").onclick = async () => {
-    const res = await fetch(`${API_BASE}/insert`, {
+    const res = await fetch(`${API_BASE}/api/v1/insert`, {
         method: "POST"
     });
     const text = await res.text();
@@ -20,7 +20,7 @@ document.getElementById("insertBtn").onclick = async () => {
 document.getElementById("submit").onclick = async () => {
     const query = encodeURIComponent(document.getElementById("sqlBox").value);
     console.log("Encoded query:", query);
-    const res = await fetch(`${API_BASE}/sql/${query}`);
+    const res = await fetch(`${API_BASE}/api/v1/sql/${query}`);
     const text = await res.text();
     document.getElementById("output").textContent = text;
 };

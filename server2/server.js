@@ -1,7 +1,8 @@
 import http from "http";
 import url from "url";
-import { ensureTableExists, insertRows, runSelectQuery } from "./db.js";
+import {Database} from "./db.js";
 
+const db = new Database();
 const server = http.createServer(async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST");
@@ -11,13 +12,13 @@ const server = http.createServer(async (req, res) => {
 
     const parsed = url.parse(req.url, true);
      //console.log(parsed);
-     //console.log(parsed.pathname)
+    //console.log(parsed.pathname)
 
     // POST insert
-    if (req.method === "POST" && parsed.pathname === "/insert") {
+    if (req.method === "POST" && parsed.pathname === "/api/v1/insert") {
         try {
-            await ensureTableExists();
-            await insertRows();
+            await db.ensureTableExists();
+            await db.insertRows();
             res.end("Rows inserted successfully.");
         } catch (err) {
             res.end("Error: " + err.message);
@@ -26,11 +27,11 @@ const server = http.createServer(async (req, res) => {
     }
 
     // GET sql/<query>
-    if (req.method === "GET" && parsed.pathname.startsWith("/sql")) {
-        const sql = decodeURIComponent(parsed.pathname.replace("/sql/", ""));
+    if (req.method === "GET" && parsed.pathname.startsWith("/api/v1/sql")) {
+        const sql = decodeURIComponent(parsed.pathname.replace("/api/v1/sql/", ""));
         console.log("Received SQL query:", sql);
         try {
-            const rows = await runSelectQuery(sql);
+            const rows = await db.runSelectQuery(sql);
             res.end(JSON.stringify(rows, null, 2));
         } catch (err) {
             res.end("SQL Error: " + err.message);

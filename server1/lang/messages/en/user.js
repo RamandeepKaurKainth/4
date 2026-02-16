@@ -4,5 +4,5 @@ export const USER_MESSAGES = {
     insert: "Insert ",
     response: "Response:",
     textBoxHint: "Enter SELECT query only",
-    insertBoxHint: "Insert predefined 4 patient use post request"
+    insertBoxHint: "Insert predefined 3 patient use post request"
 };
